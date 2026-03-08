@@ -1,0 +1,307 @@
+{% extends 'advisory/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Farm Input - Agricultural Advisory Platform" %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Progress Indicator -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-8">
+            <div class="card border-0 glass-effect">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <span class="ms-3 fw-bold">{% trans "Step 1: Farm Details" %}</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted">
+                            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span>{% trans "Step 2: Get Advisory" %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header text-white position-relative" style="background: linear-gradient(135deg, var(--secondary-green), var(--light-green)); border-radius: 20px 20px 0 0;">
+                    <div class="floating-elements"></div>
+                    <h3 class="mb-0 position-relative">
+                        <i class="fas fa-tractor me-2"></i>
+                        {% trans "Farm Information Input" %}
+                    </h3>
+                    <p class="mb-0 mt-2 position-relative opacity-75">{% trans "Please provide your farm details to get personalized crop advisory" %}</p>
+                </div>
+                <div class="card-body p-5">
+                    <form method="post" id="farmForm">
+                        {% csrf_token %}
+                        
+                        <!-- Location & Crop Section -->
+                        <div class="mb-5">
+                            <h5 class="mb-4 text-success">
+                                <i class="fas fa-map-marked-alt me-2"></i>{% trans "Location & Crop Information" %}
+                            </h5>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.district }}
+                                        <label for="{{ form.district.id_for_label }}" class="form-label">
+                                            <i class="fas fa-map-marker-alt me-1"></i>{{ form.district.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.crop }}
+                                        <label for="{{ form.crop.id_for_label }}" class="form-label">
+                                            <i class="fas fa-seedling me-1"></i>{{ form.crop.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timing Section -->
+                        <div class="mb-5">
+                            <h5 class="mb-4 text-primary">
+                                <i class="fas fa-calendar-alt me-2"></i>{% trans "Timing Information" %}
+                            </h5>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.season }}
+                                        <label for="{{ form.season.id_for_label }}" class="form-label">
+                                            <i class="fas fa-calendar me-1"></i>{{ form.season.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.sowing_date }}
+                                        <label for="{{ form.sowing_date.id_for_label }}" class="form-label">
+                                            <i class="fas fa-calendar-day me-1"></i>{{ form.sowing_date.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Field Details Section -->
+                        <div class="mb-5">
+                            <h5 class="mb-4 text-info">
+                                <i class="fas fa-expand-arrows-alt me-2"></i>{% trans "Field Details" %}
+                            </h5>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.field_area }}
+                                        <label for="{{ form.field_area.id_for_label }}" class="form-label">
+                                            <i class="fas fa-expand-arrows-alt me-1"></i>{{ form.field_area.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.irrigation }}
+                                        <label for="{{ form.irrigation.id_for_label }}" class="form-label">
+                                            <i class="fas fa-tint me-1"></i>{{ form.irrigation.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Soil & Seeds Section -->
+                        <div class="mb-5">
+                            <h5 class="mb-4 text-warning">
+                                <i class="fas fa-mountain me-2"></i>{% trans "Soil & Seeds" %}
+                            </h5>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.soil_type }}
+                                        <label for="{{ form.soil_type.id_for_label }}" class="form-label">
+                                            <i class="fas fa-mountain me-1"></i>{{ form.soil_type.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.seed_variety }}
+                                        <label for="{{ form.seed_variety.id_for_label }}" class="form-label">
+                                            <i class="fas fa-leaf me-1"></i>{{ form.seed_variety.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information Section -->
+                        <div class="mb-5">
+                            <h5 class="mb-4 text-danger">
+                                <i class="fas fa-clipboard-list me-2"></i>{% trans "Additional Information" %}
+                            </h5>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card border-0" style="background: linear-gradient(135deg, #e8f5e8, #f1f8e9);">
+                                        <div class="card-body p-4">
+                                            <div class="form-check form-switch">
+                                                {{ form.soil_health_card }}
+                                                <label class="form-check-label fw-bold" for="{{ form.soil_health_card.id_for_label }}">
+                                                    <i class="fas fa-clipboard-check me-2 text-success"></i>{{ form.soil_health_card.label }}
+                                                </label>
+                                                <small class="d-block text-muted mt-1">{% trans "Helps provide better nutrient recommendations" %}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0" style="background: linear-gradient(135deg, #fff3e0, #fce4ec);">
+                                        <div class="card-body p-4">
+                                            <div class="form-check form-switch">
+                                                {{ form.pest_presence }}
+                                                <label class="form-check-label fw-bold" for="{{ form.pest_presence.id_for_label }}">
+                                                    <i class="fas fa-bug me-2 text-danger"></i>{{ form.pest_presence.label }}
+                                                </label>
+                                                <small class="d-block text-muted mt-1">{% trans "Enables targeted pest management advice" %}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-5 pt-4">
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-lg px-5">
+                                <i class="fas fa-arrow-left me-2"></i>{% trans "Back to Home" %}
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg px-5" id="submitBtn">
+                                <i class="fas fa-chart-line me-2"></i>{% trans "Get AI Recommendation" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Help Section -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-8">
+            <div class="card border-0 glass-effect">
+                <div class="card-body p-4">
+                    <h6 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>{% trans "Tips for Better Recommendations" %}</h6>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <small>{% trans "Provide accurate field area" %}</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <small>{% trans "Select correct soil type" %}</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <small>{% trans "Choose appropriate season" %}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('farmForm');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Add form validation feedback
+    const inputs = form.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        input.addEventListener('change', function() {
+            if (this.checkValidity()) {
+                this.classList.add('is-valid');
+                this.classList.remove('is-invalid');
+            } else {
+                this.classList.add('is-invalid');
+                this.classList.remove('is-valid');
+            }
+        });
+    });
+    
+    // Enhanced submit button animation
+    form.addEventListener('submit', function(e) {
+        if (form.checkValidity()) {
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>{% trans "Analyzing Your Farm Data..." %}';
+            submitBtn.disabled = true;
+            
+            // Add progress animation
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                if (progress <= 100) {
+                    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>{% trans "Processing..." %} ${progress}%`;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 200);
+        }
+    });
+    
+    // Add floating label animation
+    const floatingInputs = document.querySelectorAll('.form-floating input, .form-floating select');
+    floatingInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.form-floating.focused label {
+    color: var(--secondary-green) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--secondary-green);
+    border-color: var(--secondary-green);
+}
+
+.form-switch .form-check-input {
+    width: 3em;
+    height: 1.5em;
+}
+
+.is-valid {
+    border-color: var(--secondary-green) !important;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+</style>
+{% endblock %}
+

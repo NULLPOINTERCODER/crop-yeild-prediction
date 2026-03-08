@@ -1,0 +1,392 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-05 20:36+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\templates\advisory\base.html:326 .\templates\advisory\base.html:401
+msgid "Krishi Salahkar"
+msgstr "कृषि सलाहकार"
+
+#: .\templates\advisory\base.html:334
+msgid "Home"
+msgstr "होम"
+
+#: .\templates\advisory\base.html:337
+msgid "Get Advisory"
+msgstr "सलाह प्राप्त करें"
+
+#: .\templates\advisory\base.html:340
+msgid "About"
+msgstr "हमारे बारे में"
+
+#: .\templates\advisory\base.html:343
+msgid "Contact"
+msgstr "संपर्क"
+
+#: .\templates\advisory\base.html:351
+msgid "Profile"
+msgstr "प्रोफ़ाइल"
+
+#: .\templates\advisory\base.html:356
+msgid "Logout"
+msgstr "लॉग आउट"
+
+#: .\templates\advisory\base.html:402
+msgid "AI-powered agricultural advisory for Odisha farmers"
+msgstr "ओडिशा के किसानों के लिए एआई-संचालित कृषि सलाहकार"
+
+#: .\templates\advisory\base.html:407
+msgid "Coverage"
+msgstr "कवरेज"
+
+#: .\templates\advisory\base.html:408
+msgid "30 Districts • 8 Crops • 3 Seasons"
+msgstr "30 जिले • 8 फसलें • 3 मौसम"
+
+#: .\templates\advisory\base.html:413
+msgid "Support"
+msgstr "सहायता"
+
+#: .\templates\advisory\base.html:414
+msgid "24/7 AI Advisory • Mobile Optimized"
+msgstr "24/7 एआई सलाहकार • मोबाइल अनुकूलित"
+
+#: .\templates\advisory\base.html:420
+msgid "&copy; 2024 Agricultural Advisory Platform - Odisha"
+msgstr ""
+
+#: .\templates\advisory\base.html:421
+msgid ""
+"Empowering farmers with AI-driven insights • Built with ❤️ for sustainable "
+"agriculture"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:4
+msgid "Farm Input - Agricultural Advisory Platform"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:18
+msgid "Step 1: Farm Details"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:24
+msgid "Step 2: Get Advisory"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:39
+msgid "Farm Information Input"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:41
+msgid "Please provide your farm details to get personalized crop advisory"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:50
+msgid "Location & Crop Information"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:75
+msgid "Timing Information"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:100
+msgid "Field Details"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:125
+msgid "Soil & Seeds"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:150
+msgid "Additional Information"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:161
+msgid "Helps provide better nutrient recommendations"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:174
+msgid "Enables targeted pest management advice"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:185
+msgid "Back to Home"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:188
+msgid "Get AI Recommendation"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:202
+msgid "Tips for Better Recommendations"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:207
+msgid "Provide accurate field area"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:213
+msgid "Select correct soil type"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:219
+msgid "Choose appropriate season"
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:251
+msgid "Analyzing Your Farm Data..."
+msgstr ""
+
+#: .\templates\advisory\farm_input.html:259
+msgid "Processing..."
+msgstr ""
+
+#: .\templates\advisory\home.html:11
+msgid "AI-Driven Agricultural Advisory Platform"
+msgstr "एआई संचालित कृषि सलाहकार प्लेटफॉर्म"
+
+#: .\templates\advisory\home.html:13
+msgid ""
+"Empowering Odisha farmers with intelligent crop yield predictions and "
+"personalized recommendations"
+msgstr "बुद्धिमान फसल उपज पूर्वानुमान और व्यक्तिगत सिफारिशों के साथ ओडिशा के किसानों को सशक्त बनाना"
+
+#: .\templates\advisory\home.html:16
+msgid "Get Your Crop Advisory"
+msgstr "अपनी फसल की सलाह प्राप्त करें"
+
+#: .\templates\advisory\home.html:19
+msgid "Check Weather"
+msgstr "मौसम जांचें"
+
+#: .\templates\advisory\home.html:22
+msgid "Connect"
+msgstr "जोड़ें"
+
+#: .\templates\advisory\home.html:25
+msgid "Learn More"
+msgstr "और जानें"
+
+#: .\templates\advisory\home.html:35
+msgid "Districts Covered"
+msgstr ""
+
+#: .\templates\advisory\home.html:41
+msgid "Major Crops"
+msgstr ""
+
+#: .\templates\advisory\home.html:47
+msgid "Accuracy Rate"
+msgstr ""
+
+#: .\templates\advisory\home.html:56
+msgid "Why Choose Krishi Salahkar?"
+msgstr ""
+
+#: .\templates\advisory\home.html:57
+msgid "Advanced AI technology meets traditional farming wisdom"
+msgstr ""
+
+#: .\templates\advisory\home.html:66
+msgid "AI-Powered Predictions"
+msgstr ""
+
+#: .\templates\advisory\home.html:67
+#, python-format
+msgid ""
+"Advanced machine learning models analyze multiple factors to predict crop "
+"yields with 95%% accuracy using historical data and real-time conditions."
+msgstr ""
+
+#: .\templates\advisory\home.html:69
+msgid "Machine Learning"
+msgstr ""
+
+#: .\templates\advisory\home.html:70
+msgid "Data Analytics"
+msgstr ""
+
+#: .\templates\advisory\home.html:79
+msgid "Odisha-Specific Data"
+msgstr ""
+
+#: .\templates\advisory\home.html:80
+msgid ""
+"Tailored recommendations based on local climate patterns, soil conditions, "
+"and agricultural practices across all 30 districts of Odisha."
+msgstr ""
+
+#: .\templates\advisory\home.html:82
+msgid "Local Expertise"
+msgstr ""
+
+#: .\templates\advisory\home.html:83
+msgid "Regional Data"
+msgstr ""
+
+#: .\templates\advisory\home.html:92
+msgid "Actionable Insights"
+msgstr ""
+
+#: .\templates\advisory\home.html:93
+msgid ""
+"Get prioritized, practical recommendations for irrigation scheduling, "
+"fertilizer application, and integrated pest management strategies."
+msgstr ""
+
+#: .\templates\advisory\home.html:95
+msgid "Practical"
+msgstr ""
+
+#: .\templates\advisory\home.html:96
+msgid "Priority-Based"
+msgstr ""
+
+#: .\templates\advisory\home.html:108
+msgid "Key Features"
+msgstr ""
+
+#: .\templates\advisory\home.html:113
+msgid "Yield prediction with confidence intervals"
+msgstr ""
+
+#: .\templates\advisory\home.html:119
+msgid "District-wise crop recommendations"
+msgstr ""
+
+#: .\templates\advisory\home.html:125
+msgid "Season-specific advisory (Kharif, Rabi, Zaid)"
+msgstr ""
+
+#: .\templates\advisory\home.html:131
+msgid "Irrigation and fertilizer guidance"
+msgstr ""
+
+#: .\templates\advisory\home.html:137
+msgid "Pest and disease management"
+msgstr ""
+
+#: .\templates\advisory\home.html:147
+msgid "Supported Crops"
+msgstr ""
+
+#: .\templates\advisory\home.html:152
+msgid "Rice"
+msgstr ""
+
+#: .\templates\advisory\home.html:153
+msgid "Staple Crop"
+msgstr ""
+
+#: .\templates\advisory\home.html:159
+msgid "Maize"
+msgstr ""
+
+#: .\templates\advisory\home.html:160
+msgid "Cereal"
+msgstr ""
+
+#: .\templates\advisory\home.html:166
+msgid "Wheat"
+msgstr ""
+
+#: .\templates\advisory\home.html:167
+msgid "Winter Crop"
+msgstr ""
+
+#: .\templates\advisory\home.html:173
+msgid "Groundnut"
+msgstr ""
+
+#: .\templates\advisory\home.html:174
+msgid "Oilseed"
+msgstr ""
+
+#: .\templates\advisory\home.html:180
+msgid "Mung"
+msgstr ""
+
+#: .\templates\advisory\home.html:181
+msgid "Pulse"
+msgstr ""
+
+#: .\templates\advisory\home.html:187
+msgid "Cotton"
+msgstr ""
+
+#: .\templates\advisory\home.html:188
+msgid "Fiber"
+msgstr ""
+
+#: .\templates\advisory\home.html:194
+msgid "Sugarcane"
+msgstr ""
+
+#: .\templates\advisory\home.html:195
+msgid "Cash Crop"
+msgstr ""
+
+#: .\templates\advisory\home.html:201
+msgid "Turmeric"
+msgstr ""
+
+#: .\templates\advisory\home.html:202
+msgid "Spice"
+msgstr ""
+
+#: .\templates\advisory\home.html:215
+msgid "Ready to Optimize Your Crop Yield?"
+msgstr ""
+
+#: .\templates\advisory\home.html:216
+msgid ""
+"Join thousands of farmers who are already using AI to make smarter farming "
+"decisions"
+msgstr ""
+
+#: .\templates\advisory\home.html:218
+msgid "Start Your Advisory Now"
+msgstr ""
+
+#: .\templates\advisory\home.html:230
+msgid "Contact Us"
+msgstr ""
+
+#: .\templates\advisory\home.html:233
+msgid ""
+"Have questions about our AI advisory platform? We'd love to hear from you!"
+msgstr ""
+
+#: .\templates\advisory\home.html:239
+msgid "Full Name"
+msgstr ""
+
+#: .\templates\advisory\home.html:246
+msgid "Email Address"
+msgstr ""
+
+#: .\templates\advisory\home.html:254
+msgid "Subject"
+msgstr ""
+
+#: .\templates\advisory\home.html:261
+msgid "Message"
+msgstr ""
+
+#: .\templates\advisory\home.html:269
+msgid "Send Message"
+msgstr ""

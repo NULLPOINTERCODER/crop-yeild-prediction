@@ -1,0 +1,190 @@
+{% extends 'advisory/base.html' %}
+
+{% block content %}
+<div class="container py-5" style="position: relative;">
+    <div class="floating-elements"></div>
+    <div class="hero-section text-center mb-5 position-relative" style="padding: 80px 0; border-radius: 25px; margin-bottom: 40px !important; overflow: hidden;">
+        <div class="floating-elements"></div>
+        <h2 class="display-4 mb-3 fade-in-up" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);"><i class="fas fa-cloud-sun me-3"></i>Weather Forecast</h2>
+        <p class="lead mb-4 slide-in-left">Get accurate weather predictions for better farming decisions</p>
+
+        <!-- Location Input Form -->
+        <form method="get" class="d-flex justify-content-center mb-4" id="weatherForm">
+            <div class="input-group glass-effect p-2" style="max-width: 600px; border-radius: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                <span class="input-group-text bg-transparent border-0"><i class="fas fa-map-marker-alt text-primary"></i></span>
+                <input type="text" name="location" id="locationInput" class="form-control border-0 bg-transparent" placeholder="Enter city name" value="{{ location }}" style="font-weight: 500;">
+                <input type="hidden" name="lat" id="latInput">
+                <input type="hidden" name="lon" id="lonInput">
+                <button class="btn btn-info border-0 me-2" type="button" onclick="getMyLocation()" style="border-radius: 25px;">
+                    <i class="fas fa-crosshairs me-2"></i>My Location
+                </button>
+                <button class="btn btn-primary border-0" type="submit" style="border-radius: 25px;">
+                    <i class="fas fa-search me-2"></i>Get Forecast
+                </button>
+            </div>
+        </form>
+        <div id="locationStatus" class="text-center mb-3"></div>
+
+        {% if location %}
+            <div class="mb-3 text-center">
+                <div class="card text-center p-3 shadow-sm glass-effect fade-in-up" style="max-width: 300px; margin: 0 auto; display: inline-block;">
+                    <h5><i class="fas fa-calendar-alt me-2"></i>Current Date & Time</h5>
+                    <p><strong>Date:</strong> {{ current_date }}</p>
+                    <p><strong>Day:</strong> {{ current_day }}</p>
+                    <p><strong>Time:</strong> {{ current_time }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if location %}
+        <h3 class="mb-4">Weather for {{ location }}</h3>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>{{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% else %}
+        <div class="metric-card mb-5 p-4">
+            <h4 class="text-center mb-4"><i class="fas fa-thermometer-half me-2 text-primary"></i>Current Weather</h4>
+            <div class="row text-center">
+                <div class="col-md-3 mb-3">
+                    <div class="glass-effect p-3 rounded-3">
+                        <i class="fas fa-temperature-high fa-2x text-danger mb-2"></i>
+                        <div class="metric-value">{{ current_weather.main.temp }}°C</div>
+                        <div class="metric-label">Temperature</div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="glass-effect p-3 rounded-3">
+                        <i class="fas fa-tint fa-2x text-info mb-2"></i>
+                        <div class="metric-value">{{ current_weather.main.humidity }}%</div>
+                        <div class="metric-label">Humidity</div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="glass-effect p-3 rounded-3">
+                        <img src="http://openweathermap.org/img/wn/{{ current_weather.weather.0.icon }}@2x.png" alt="Weather icon" class="mb-2" style="width: 50px;">
+                        <div class="metric-value" style="font-size: 1.5rem;">{{ current_weather.weather.0.description|title }}</div>
+                        <div class="metric-label">Conditions</div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="glass-effect p-3 rounded-3">
+                        <i class="fas fa-wind fa-2x text-warning mb-2"></i>
+                        <div class="metric-value">{{ current_weather.wind.speed }} m/s</div>
+                        <div class="metric-label">Wind Speed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4>Hourly Forecast</h4>
+        <div class="hourly-forecast mb-4 overflow-auto">
+            <div class="d-flex flex-nowrap">
+                {% for hour in hourly_forecasts %}
+                <div class="card text-center p-2 me-2 shadow-sm" style="min-width: 120px;">
+                    <h6>{{ hour.time }}</h6>
+                    <img src="http://openweathermap.org/img/wn/{{ hour.icon }}.png" alt="Weather icon">
+                    <p class="mb-1">{{ hour.temp }} °C</p>
+                    <small>{{ hour.description|title }}</small>
+                    <small>Humidity: {{ hour.humidity }}%</small>
+                    <small>Wind: {{ hour.wind_speed }} m/s</small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h4>5-Day Forecast</h4>
+        <div class="hourly-forecast mb-4 overflow-auto">
+            <div class="d-flex flex-nowrap">
+                {% for day in daily_forecasts %}
+                <div class="card text-center p-3 me-2 shadow-sm" style="min-width: 140px;">
+                    <h5>{{ day.date }}</h5>
+                    <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather icon">
+                    <p>{{ day.description|title }}</p>
+                    <p>Min: {{ day.temp_min }} °C</p>
+                    <p>Max: {{ day.temp_max }} °C</p>
+                    <p>Humidity: {{ day.humidity }}%</p>
+                    <p>Wind: {{ day.wind_speed }} m/s</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+function getMyLocation() {
+    const statusDiv = document.getElementById('locationStatus');
+    const locationInput = document.getElementById('locationInput');
+    const latInput = document.getElementById('latInput');
+    const lonInput = document.getElementById('lonInput');
+    const form = document.getElementById('weatherForm');
+    
+    if (!navigator.geolocation) {
+        statusDiv.innerHTML = '<div class="alert alert-warning">Geolocation is not supported by your browser</div>';
+        return;
+    }
+    
+    statusDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-spinner fa-spin me-2"></i>Getting your location...</div>';
+    
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            // Set coordinates in hidden fields
+            latInput.value = lat;
+            lonInput.value = lon;
+            
+            // Get city name for display
+            fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=e79c4debc331021a1af91e5786fce21f`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const cityName = data[0].name;
+                        locationInput.value = cityName;
+                        statusDiv.innerHTML = `<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>Location detected: ${cityName}</div>`;
+                    } else {
+                        locationInput.value = 'My Location';
+                        statusDiv.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>Location detected</div>';
+                    }
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1000);
+                })
+                .catch(error => {
+                    locationInput.value = 'My Location';
+                    statusDiv.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>Location detected</div>';
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1000);
+                });
+        },
+        function(error) {
+            let errorMsg = 'Unable to get your location. ';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMsg += 'Please allow location access.';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMsg += 'Location information unavailable.';
+                    break;
+                case error.TIMEOUT:
+                    errorMsg += 'Request timed out.';
+                    break;
+            }
+            statusDiv.innerHTML = `<div class="alert alert-danger">${errorMsg}</div>`;
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+</script>
+{% endblock %}

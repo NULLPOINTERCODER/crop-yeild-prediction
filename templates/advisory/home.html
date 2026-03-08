@@ -1,0 +1,236 @@
+{% extends 'advisory/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <div class="floating-elements"></div>
+    <div class="container position-relative">
+        <div class="fade-in-up">
+            <h1 class="display-3 mb-4 fw-bold">
+                <i class="fas fa-seedling me-3 pulse"></i>
+                {% trans "AI-Driven Agricultural Advisory Platform" %}
+            </h1>
+            <p class="lead mb-5 fs-4">{% trans "Empowering Odisha farmers with intelligent crop yield predictions and personalized recommendations" %}</p>
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                <a href="{% url 'farm_input' %}" class="btn btn-light btn-lg px-5 py-3">
+                    <i class="fas fa-chart-line me-2"></i>{% trans "Get Your Crop Advisory" %}
+                </a>
+                <a href="{% url 'weather_forecast' %}" class="btn btn-outline-light btn-lg px-5 py-3">
+                    <i class="fas fa-cloud-sun me-2"></i>{% trans "Check Weather" %}
+                </a>
+                <button onclick="findNearbyShops()" class="btn btn-outline-light btn-lg px-5 py-3">
+                    <i class="fas fa-store me-2"></i>Find Nearby Shops
+                </button>
+            </div>
+        </div>
+        
+        <div class="row mt-5 pt-5">
+            <div class="col-md-4 mb-3">
+                <div class="glass-effect p-4 rounded-3 text-center">
+                    <div class="metric-value">30+</div>
+                    <div class="metric-label text-light">{% trans "Districts Covered" %}</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="glass-effect p-4 rounded-3 text-center">
+                    <div class="metric-value">8</div>
+                    <div class="metric-label text-light">{% trans "Major Crops" %}</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="glass-effect p-4 rounded-3 text-center">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label text-light">{% trans "Accuracy Rate" %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">{% trans "Why Choose Krishi Salahkar?" %}</h2>
+        <p class="lead text-muted">{% trans "AI-powered agricultural intelligence for Odisha farmers" %}</p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3" style="font-size: 3rem; color: #2e7d32;">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4 class="mb-3">{% trans "AI-Powered Predictions" %}</h4>
+                    <p class="text-muted">{% trans "Advanced algorithms analyze your farm data to predict crop yields with high accuracy" %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3" style="font-size: 3rem; color: #2e7d32;">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4 class="mb-3">{% trans "Odisha-Specific" %}</h4>
+                    <p class="text-muted">{% trans "Tailored recommendations for all 30 districts based on local climate and soil conditions" %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3" style="font-size: 3rem; color: #2e7d32;">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h4 class="mb-3">{% trans "Actionable Insights" %}</h4>
+                    <p class="text-muted">{% trans "Get prioritized recommendations for irrigation, fertilization, and pest management" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works Section -->
+<div class="py-5" style="background: linear-gradient(135deg, #e8f5e9, #f1f8e9);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">{% trans "How It Works" %}</h2>
+            <p class="lead text-muted">{% trans "Get personalized farming advice in 3 simple steps" %}</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                        <span class="fw-bold">1</span>
+                    </div>
+                    <h4>{% trans "Enter Farm Details" %}</h4>
+                    <p class="text-muted">{% trans "Provide information about your crop, district, soil type, and farming practices" %}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                        <span class="fw-bold">2</span>
+                    </div>
+                    <h4>{% trans "AI Analysis" %}</h4>
+                    <p class="text-muted">{% trans "Our AI analyzes your data and predicts yield based on multiple factors" %}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                        <span class="fw-bold">3</span>
+                    </div>
+                    <h4>{% trans "Get Recommendations" %}</h4>
+                    <p class="text-muted">{% trans "Receive personalized advice to optimize your crop yield and farm productivity" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Supported Crops Section -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">{% trans "Supported Crops" %}</h2>
+        <p class="lead text-muted">{% trans "Expert guidance for major crops in Odisha" %}</p>
+    </div>
+    
+    <div class="row g-3">
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-leaf text-success fs-1 mb-2"></i>
+                <h6>{% trans "Rice" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-seedling text-warning fs-1 mb-2"></i>
+                <h6>{% trans "Maize" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-wheat-awn text-orange fs-1 mb-2"></i>
+                <h6>{% trans "Wheat" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-circle text-brown fs-1 mb-2"></i>
+                <h6>{% trans "Groundnut" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-leaf text-success fs-1 mb-2"></i>
+                <h6>{% trans "Mung" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-cotton-bureau text-secondary fs-1 mb-2"></i>
+                <h6>{% trans "Cotton" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-candy-cane text-success fs-1 mb-2"></i>
+                <h6>{% trans "Sugarcane" %}</h6>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <i class="fas fa-pepper-hot text-warning fs-1 mb-2"></i>
+                <h6>{% trans "Turmeric" %}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="py-5" style="background: linear-gradient(135deg, #2e7d32, #66bb6a);">
+    <div class="container text-center text-white">
+        <h2 class="display-5 fw-bold mb-3">{% trans "Ready to Optimize Your Crop Yield?" %}</h2>
+        <p class="lead mb-4">{% trans "Join thousands of farmers using AI for smarter farming decisions" %}</p>
+        <a href="{% url 'farm_input' %}" class="btn btn-light btn-lg px-5 py-3">
+            <i class="fas fa-rocket me-2"></i>{% trans "Get Started Now" %}
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function findNearbyShops() {
+    if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser');
+        window.location.href = '/nearby-shops/';
+        return;
+    }
+    
+    const btn = event.target;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Getting location...';
+    btn.disabled = true;
+    
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            window.location.href = `/nearby-shops/?lat=${lat}&lon=${lon}`;
+        },
+        function(error) {
+            alert('Could not get your location. Showing all shops.');
+            window.location.href = '/nearby-shops/';
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+</script>
+{% endblock %}

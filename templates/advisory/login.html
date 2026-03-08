@@ -1,0 +1,67 @@
+{% extends 'advisory/base.html' %}
+
+{% block title %}Login - Krishi Salahkar{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i>Login to Krishi Salahkar</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Username</label>
+                            <input type="text" name="username" autofocus required id="id_username" class="form-control" placeholder="Enter your username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password" required id="id_password" class="form-control rounded-start" placeholder="Enter your password" style="border-radius: 15px 0 0 15px;">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-radius: 0 15px 15px 0;">
+                                    <i class="fas fa-eye" id="passwordIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="text-center">
+                        <p class="mb-2">Don't have an account?</p>
+                        <a href="{% url 'signup' %}" class="btn btn-success">Create New Account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('id_password');
+    const passwordIcon = document.getElementById('passwordIcon');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        passwordIcon.classList.remove('fa-eye');
+        passwordIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        passwordIcon.classList.remove('fa-eye-slash');
+        passwordIcon.classList.add('fa-eye');
+    }
+});
+</script>
+{% endblock %}

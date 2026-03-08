@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Agricultural Advisory Platform - Odisha{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-green: #0b3d0b;   /* darker green */
+            --secondary-green: #145214; /* slightly lighter, but still dark */
+            --accent-orange: #ff6b35;
+            --light-green: #66bb6a;
+            --cream: #faf0e6;
+            --gold: #ffd700;
+            --shadow: rgba(12, 226, 48, 0.67);
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body { 
+            background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 50%, #dcedc8 100%); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .navbar-brand { 
+            font-weight: 700; 
+            font-size: 1.8rem; 
+            text-shadow: 2px 2px 4px rgba(126, 220, 18, 0.3);
+        }
+        .navbar { 
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)) !important; 
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-section { 
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 50%, var(--light-green) 100%); 
+            color: white; 
+            padding: 120px 0; 
+            position: relative; 
+            overflow: hidden;
+            min-height: 70vh;
+        }
+        .hero-section::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="40" cy="80" r="1.5" fill="%23ffffff" opacity="0.1"/><path d="M10,50 Q50,10 90,50 Q50,90 10,50" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></svg>') repeat;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(255,255,255,0.1), transparent);
+        }
+        
+        .card { 
+            box-shadow: 0 10px 30px var(--shadow); 
+            border: none; 
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .card:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+        }
+        
+        .btn { 
+            border-radius: 30px; 
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before { left: 100%; }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--accent-orange), #ff8a50); 
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        .btn-primary:hover { 
+            background: linear-gradient(135deg, #e55a2b, var(--accent-orange)); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+        }
+        
+        .btn-success { 
+            background: linear-gradient(135deg, var(--secondary-green), var(--light-green)); 
+            border: none;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+        }
+        .btn-success:hover { 
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.6);
+        }
+        
+        .feature-icon { 
+            font-size: 4.5rem; 
+            background: linear-gradient(135deg, var(--secondary-green), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .yield-prediction { 
+            background: linear-gradient(135deg, var(--secondary-green), var(--light-green), var(--gold)); 
+            color: white; 
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .yield-prediction::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        
+        .recommendation-card { 
+            background: linear-gradient(135deg, var(--cream), #ffffff, #f8f9fa); 
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .action-item { 
+            background: linear-gradient(135deg, #fff, #f8f9fa); 
+            border-left: 6px solid var(--accent-orange); 
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .action-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--accent-orange), var(--secondary-green));
+            transition: width 0.3s ease;
+        }
+        .action-item:hover { 
+            border-left-color: var(--secondary-green); 
+            transform: translateX(10px) scale(1.02); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .action-item:hover::before { width: 8px; }
+        
+        .form-control, .form-select { 
+            border-radius: 15px; 
+            border: 2px solid #e9ecef; 
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.9);
+        }
+        .form-control:focus, .form-select:focus { 
+            border-color: var(--secondary-green); 
+            box-shadow: 0 0 0 0.3rem rgba(46, 125, 50, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar { 
+            background: linear-gradient(90deg, var(--secondary-green), var(--light-green)); 
+            border-radius: 10px;
+        }
+        
+        .badge { 
+            border-radius: 20px; 
+            padding: 8px 16px;
+            font-weight: 600;
+        }
+        
+        .language-toggle {
+            display: none !important;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-in-left { animation: slideInLeft 0.8s ease-out; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+        
+        .metric-card { 
+            background: linear-gradient(135deg, #fff, #f8f9fa, var(--cream)); 
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--secondary-green), var(--light-green), var(--gold));
+        }
+        
+        .metric-value { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, var(--secondary-green), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .metric-label { 
+            color: #6c757d; 
+            font-size: 0.95rem; 
+            font-weight: 500;
+        }
+        
+        .card-header {
+            border-radius: 20px 20px 0 0 !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .card:hover .card-header::before { left: 100%; }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating-elements::before {
+            top: 20%; left: 10%;
+            animation-delay: 0s;
+        }
+        .floating-elements::after {
+            top: 60%; right: 15%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section { padding: 80px 0; }
+            .feature-icon { font-size: 3rem; }
+            .metric-value { font-size: 2rem; }
+            .language-toggle { top: 70px; right: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <i class="fas fa-seedling me-2"></i>{% trans "Krishi Salahkar" %}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">{% trans "Home" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'farm_input' %}">{% trans "Get Advisory" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">{% trans "Contact" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register_shop' %}">
+                                <i class="fas fa-store me-1"></i>Register Shop
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-globe me-1"></i>
+                                {% if LANGUAGE_CODE == 'hi' %}हिन्दी{% elif LANGUAGE_CODE == 'or' %}ଓଡ଼ିଆ{% else %}English{% endif %}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li>
+                                    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input name="language" type="hidden" value="en">
+                                        <input name="next" type="hidden" value="{{ request.path }}">
+                                        <button type="submit" class="dropdown-item" style="background: none; border: none; cursor: pointer; width: 100%; text-align: left;">
+                                            🇬🇧 English
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input name="language" type="hidden" value="hi">
+                                        <input name="next" type="hidden" value="{{ request.path }}">
+                                        <button type="submit" class="dropdown-item" style="background: none; border: none; cursor: pointer; width: 100%; text-align: left;">
+                                            🇮🇳 हिन्दी
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input name="language" type="hidden" value="or">
+                                        <input name="next" type="hidden" value="{{ request.path }}">
+                                        <button type="submit" class="dropdown-item" style="background: none; border: none; cursor: pointer; width: 100%; text-align: left;">
+                                            🇮🇳 ଓଡ଼ିଆ
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user me-1"></i>{{ user.username }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#profile">{% trans "Profile" %}</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form method="post" action="{% url 'logout' %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="dropdown-item">{% trans "Logout" %}</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% if messages %}
+            <div class="container mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block extra_js %}
+        {% endblock %}
+
+        <!-- Floating AI Chatbot Button -->
+        <button id="chatbotToggle" class="floating-chatbot-btn" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </button>
+
+        <!-- Chatbot Modal -->
+        <div id="chatbotModal" class="chatbot-modal" style="display: none;">
+            <div class="chatbot-header">
+                <h6 class="mb-0"><i class="fas fa-robot me-2"></i>Krishi Salahkar AI</h6>
+                <button onclick="toggleChatbot()" class="btn-close-chat">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="bot-msg">
+                    <p>Hello! I'm Krishi Salahkar AI. Ask me anything about farming!</p>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Ask about crops, soil, pests..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <style>
+        .floating-chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 9998;
+            transition: all 0.3s ease;
+        }
+        .floating-chatbot-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        .chatbot-modal {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+        }
+        .chatbot-header {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .bot-msg, .user-msg {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .bot-msg {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            color: white;
+            margin-right: auto;
+        }
+        .user-msg {
+            background: #e3f2fd;
+            color: #333;
+            margin-left: auto;
+            text-align: right;
+        }
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .chatbot-input input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 10px 15px;
+            outline: none;
+        }
+        .chatbot-input button {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .chatbot-modal {
+                width: 90%;
+                right: 5%;
+                bottom: 90px;
+            }
+            .floating-chatbot-btn {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        </style>
+
+        <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function toggleChatbot() {
+            const modal = document.getElementById('chatbotModal');
+            modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const messagesDiv = document.getElementById('chatbotMessages');
+            messagesDiv.innerHTML += `<div class="user-msg"><p class="mb-0">${message}</p></div>`;
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            messagesDiv.innerHTML += `<div class="bot-msg"><p class="mb-0">Thinking...</p></div>`;
+
+            fetch('/chatbot/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: 'message=' + encodeURIComponent(message)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const lastMsg = messagesDiv.lastElementChild;
+                if (lastMsg && lastMsg.textContent === 'Thinking...') {
+                    lastMsg.remove();
+                }
+                if (data.status === 'success') {
+                    messagesDiv.innerHTML += `<div class="bot-msg"><p class="mb-0">${data.response}</p></div>`;
+                } else {
+                    messagesDiv.innerHTML += `<div class="bot-msg"><p class="mb-0">Sorry, I encountered an error. Please try again.</p></div>`;
+                }
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            })
+            .catch(error => {
+                const lastMsg = messagesDiv.lastElementChild;
+                if (lastMsg && lastMsg.textContent === 'Thinking...') {
+                    lastMsg.remove();
+                }
+                messagesDiv.innerHTML += `<div class="bot-msg"><p class="mb-0">Sorry, I encountered an error. Please try again.</p></div>`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            });
+        }
+        </script>
+
+        <!-- Language Dropdown - REMOVED FROM HERE -->
+
+        <footer class="mt-5" style="background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); color: white; position: relative; overflow: hidden;">
+            <div class="floating-elements"></div>
+            <div class="container py-5">
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="glass-effect p-4 rounded-3 h-100">
+                            <h5><i class="fas fa-seedling me-2 text-warning"></i>{% trans "Krishi Salahkar" %}</h5>
+                            <p class="small mb-0">{% trans "AI-powered agricultural advisory for Odisha farmers" %}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="glass-effect p-4 rounded-3 h-100">
+                            <h5><i class="fas fa-chart-bar me-2 text-warning"></i>{% trans "Coverage" %}</h5>
+                            <p class="small mb-0">{% trans "30 Districts • 8 Crops • 3 Seasons" %}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="glass-effect p-4 rounded-3 h-100">
+                            <h5><i class="fas fa-headset me-2 text-warning"></i>{% trans "Support" %}</h5>
+                            <p class="small mb-0">{% trans "24/7 AI Advisory • Mobile Optimized" %}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4" style="border-color: rgba(255,255,255,0.3);">
+                <div class="text-center">
+                    <p class="mb-2">{% trans "&copy; 2024 Agricultural Advisory Platform - Odisha" %}</p>
+                    <p class="small mb-0">{% trans "Empowering farmers with AI-driven insights • Built with ❤️ for sustainable agriculture" %}</p>
+                </div>
+            </div>
+        </footer>
+
+    </script>

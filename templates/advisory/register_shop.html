@@ -1,0 +1,82 @@
+{% extends 'advisory/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header text-white" style="background: linear-gradient(135deg, #2e7d32, #66bb6a);">
+                    <h3 class="mb-0"><i class="fas fa-store me-2"></i>Register Your Pesticide Shop</h3>
+                    <p class="mb-0 small">Help farmers find your shop and products</p>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Register your shop to appear in recommendations when farmers need pesticides in your area.
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <h5 class="mb-3"><i class="fas fa-building me-2"></i>Shop Information</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Shop Name *</label>
+                                {{ form.shop_name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Owner Name *</label>
+                                {{ form.owner_name }}
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="fas fa-phone me-2"></i>Contact Details</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number *</label>
+                                {{ form.phone }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email (Optional)</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="fas fa-map-marker-alt me-2"></i>Location</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">District *</label>
+                                {{ form.district }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Pincode *</label>
+                                {{ form.pincode }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Complete Address *</label>
+                            {{ form.address }}
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="fas fa-spray-can me-2"></i>Products Available</h5>
+                        <div class="mb-3">
+                            <label class="form-label">Pesticides Available *</label>
+                            {{ form.pesticides_available }}
+                            <small class="text-muted">List all pesticides you stock (e.g., Neem Oil, Chlorpyrifos, Imidacloprid)</small>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-check-circle me-2"></i>Register Shop
+                            </button>
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Home
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+remote: error: GH013: Repository rule violations found for refs/heads/main.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   —————————————————————————————————————————        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to resolve a blocked push        
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
+remote:             
+remote:             
+remote:       —— Twilio Account String Identifier ——————————————————        
+remote:        locations:        
+remote:          - commit: 795d2d9f3fe869b7c6f03d8c9c59dfe6addd4ee4        
+remote:            path: agri_platform/__pycache__/settings.cpython-310.pyc:5        
+remote:          - commit: 795d2d9f3fe869b7c6f03d8c9c59dfe6addd4ee4        
+remote:            path: agri_platform/__pycache__/settings.cpython-313.pyc:7        
+remote:          - commit: 795d2d9f3fe869b7c6f03d8c9c59dfe6addd4ee4        
+remote:            path: agri_platform/settings.py:96        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/NULLPOINTERCODER/crop-yeild-prediction/security/secret-scanning/unblock-secret/3Aes3E14NvjN69rPYe7XIAgbO3x        
+remote:             
+remote:             
+remote:       —— OpenAI API Key ————————————————————————————————————        
+remote:        locations:        
+remote:          - commit: 795d2d9f3fe869b7c6f03d8c9c59dfe6addd4ee4        
+remote:            path: advisory/views.py:218        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/NULLPOINTERCODER/crop-yeild-prediction/security/secret-scanning/unblock-secret/3Aes3Ch8J2q05D0rjWyFV674cjn        
+remote:             
+remote: 
+remote: 
+To https://github.com/NULLPOINTERCODER/crop-yeild-prediction.git
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/NULLPOINTERCODER/crop-yeild-prediction.git'
